@@ -31,6 +31,12 @@ public class CmdController {
                 WiseSaying wiseSaying = new WiseSaying(WiseSaying.idVal++, content, authorName);
                 System.out.println(wiseSaying.getId()+ "번 명언이 등록되었습니다.");
                 wiseSayingRepo.getWiseSayingList().add(wiseSaying);
+            }else if(cmd.equals("목록")){
+                System.out.println("번호 / 작가 / 명언");
+                System.out.println("----------------------");
+                for (WiseSaying ws: wiseSayingRepo.getWiseSayingList()){
+                    System.out.println(ws.getId()+ " / "+ ws.getAuthor()+ " / "+ ws.getBody());
+                }
             }
         }
     }

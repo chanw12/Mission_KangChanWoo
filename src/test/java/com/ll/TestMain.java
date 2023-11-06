@@ -149,5 +149,34 @@ public class TestMain {
 
     }
 
+    @Test
+    @DisplayName("목록 기능")
+    void t8(){
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+
+        Scanner scanner = TestUtil.genScanner("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                목록
+                종료
+                        """.stripIndent());
+        WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+
+        new App(scanner,wiseSayingRepo,cmdController).run();
+        List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
+        scanner.close();
+        String rs = byteArrayOutputStream.toString();
+        Assertions.assertThat(rs).contains("""
+                번호 / 작가 / 명언
+                ----------------------
+                1 / 작자미상 / 현재를 사랑하라.
+                """
+        );
+
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+    }
+
 
 }
