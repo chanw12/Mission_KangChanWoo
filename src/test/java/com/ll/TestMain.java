@@ -2,9 +2,10 @@ package com.ll;
 
 
 import com.ll.domain.Context;
-import com.ll.domain.Repository.WiseSayingRepo;
+import com.ll.domain.repository.WiseSayingRepo;
 import com.ll.domain.WiseSaying;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TestMain {
+    @BeforeEach
+    void setUp(){
+        WiseSaying.idVal = 1;
+
+    }
+
+
     @Test
     @DisplayName("명령어 입력창 구현")
     void t1(){

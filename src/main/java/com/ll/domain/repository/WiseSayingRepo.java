@@ -1,4 +1,4 @@
-package com.ll.domain.Repository;
+package com.ll.domain.repository;
 
 import com.ll.domain.WiseSaying;
 

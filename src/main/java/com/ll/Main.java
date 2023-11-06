@@ -1,6 +1,6 @@
 package com.ll;
 
-import com.ll.domain.Repository.WiseSayingRepo;
+import com.ll.domain.repository.WiseSayingRepo;
 
 import java.util.Scanner;
 
