@@ -1,6 +1,7 @@
 package com.ll;
 
 
+import com.ll.domain.WiseSaying;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,4 +55,6 @@ public class TestMain {
         WiseSaying wiseSaying = new WiseSaying(WiseSaying.idVal++,"안녕하세요","강찬우");
 
     }
+
+
 }

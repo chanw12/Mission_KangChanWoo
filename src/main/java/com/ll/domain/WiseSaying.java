@@ -1,4 +1,4 @@
-package com.ll;
+package com.ll.domain;
 
 public class WiseSaying {
     public static int idVal = 1;
