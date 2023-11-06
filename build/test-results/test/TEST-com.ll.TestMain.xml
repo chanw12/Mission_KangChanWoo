@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.ll.TestMain" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-06T04:19:53" hostname="gangchan-uui-MacBookPro.local" time="0.042">
+<testsuite name="com.ll.TestMain" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-06T06:04:49" hostname="gangchan-uui-MacBookPro.local" time="0.042">
   <properties/>
-  <testcase name="수정 기능 확인" classname="com.ll.TestMain" time="0.042"/>
+  <testcase name="파일 저장 기능 확인" classname="com.ll.TestMain" time="0.042"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

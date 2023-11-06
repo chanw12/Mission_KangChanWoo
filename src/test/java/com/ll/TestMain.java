@@ -6,19 +6,32 @@ import com.ll.domain.controller.CmdController;
 import com.ll.domain.repository.WiseSayingRepo;
 import com.ll.domain.WiseSaying;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class TestMain {
+    private File testFile;
     @BeforeEach
     void setUp(){
         WiseSaying.idVal = 1;
+        WiseSayingRepo.setFilename("testfile.txt");
+        try {
+            testFile = File.createTempFile("testfile", ".txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @AfterEach
+    void tearDown() {
+        List<WiseSaying> wiseSayingList = new ArrayList<>();
+        WiseSayingRepo.saveData(wiseSayingList);
     }
 
 
@@ -142,7 +155,7 @@ public class TestMain {
         new App(scanner,wiseSayingRepo,cmdController).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
         scanner.close();
-
+        Assertions.assertThat(wiseSayingList.size()).isEqualTo(2);
         Assertions.assertThat(wiseSayingList.get(1).getId()).isEqualTo(2);
 
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
@@ -279,6 +292,72 @@ public class TestMain {
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
 
     }
+
+
+    @Test
+    @DisplayName("파일 로드 기능 확인")
+    void t12() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+
+
+        try {
+            testFile = File.createTempFile("testfile", ".txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        WiseSaying wiseSaying = new WiseSaying(1,"현재를 사랑하라.","작자미상");
+        List<WiseSaying> wiseSayingList = new ArrayList<>();
+        wiseSayingList.add(wiseSaying);
+        WiseSayingRepo.saveData(wiseSayingList);
+
+        Scanner scanner = TestUtil.genScanner("""
+                    목록
+                    종료
+                            """.stripIndent());
+        WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+
+        new App(scanner, wiseSayingRepo, cmdController).run();
+        String rs = byteArrayOutputStream.toString();
+        Assertions.assertThat(rs).contains("""
+                1 / 작자미상 / 현재를 사랑하라.
+                """
+        );
+        scanner.close();
+
+
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+
+    }
+
+    @Test
+    @DisplayName("파일 저장 기능 확인")
+    void t13() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+        Scanner scanner = TestUtil.genScanner("""
+                    등록
+                    현재를 사랑하라.
+                    작자미상
+                    종료
+                    목록
+                    종료
+                            """.stripIndent());
+        WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+
+        new App(scanner, wiseSayingRepo, cmdController).run();
+        new App(scanner, wiseSayingRepo, cmdController).run();
+
+
+        String rs = byteArrayOutputStream.toString();
+        Assertions.assertThat(rs).contains("""
+                1 / 작자미상 / 현재를 사랑하라.
+                """
+        );
+        scanner.close();
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+    }
+
 
 
 }

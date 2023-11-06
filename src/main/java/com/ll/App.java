@@ -1,7 +1,6 @@
 package com.ll;
 
-import com.ll.domain.Context;
-import com.ll.domain.WiseSaying;
+
 import com.ll.domain.controller.CmdController;
 import com.ll.domain.repository.WiseSayingRepo;
 
@@ -21,6 +20,9 @@ public class App {
 
     public void run() {
         System.out.println("== 명언 앱 ==");
+        WiseSayingRepo.setWiseSayingList(WiseSayingRepo.loadData());
+
         cmdController.cmdStart();
+        WiseSayingRepo.saveData(wiseSayingRepo.getWiseSayingList());
     }
 }

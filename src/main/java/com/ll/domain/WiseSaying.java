@@ -1,6 +1,9 @@
 package com.ll.domain;
 
-public class WiseSaying {
+import java.io.Serializable;
+
+public class WiseSaying implements Serializable {
+
     public static int idVal = 1;
     private int id;
     private String body;
