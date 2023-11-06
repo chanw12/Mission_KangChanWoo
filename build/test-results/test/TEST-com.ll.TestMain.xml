@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.ll.TestMain" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-11-06T02:29:03" hostname="gangchan-uui-MacBookPro.local" time="0.047">
+<testsuite name="com.ll.TestMain" tests="10" skipped="0" failures="0" errors="0" timestamp="2023-11-06T02:50:46" hostname="gangchan-uui-MacBookPro.local" time="0.07">
   <properties/>
-  <testcase name="명령어 입력창 구현" classname="com.ll.TestMain" time="0.033"/>
-  <testcase name="명령어 입력 확인" classname="com.ll.TestMain" time="0.001"/>
-  <testcase name="종료 기능 확인" classname="com.ll.TestMain" time="0.002"/>
-  <testcase name="명언 클래스 생성 확인" classname="com.ll.TestMain" time="0.0"/>
-  <testcase name="명언 명령어 입력시 명언 ,작가 입력창 구현" classname="com.ll.TestMain" time="0.003"/>
+  <testcase name="명령어 입력창 구현" classname="com.ll.TestMain" time="0.046"/>
+  <testcase name="명령어 입력 확인" classname="com.ll.TestMain" time="0.002"/>
+  <testcase name="종료 기능 확인" classname="com.ll.TestMain" time="0.003"/>
+  <testcase name="명언 클래스 생성 확인" classname="com.ll.TestMain" time="0.001"/>
+  <testcase name="명언 명령어 입력시 명언 ,작가 입력창 구현" classname="com.ll.TestMain" time="0.004"/>
   <testcase name="명언 등록 확인" classname="com.ll.TestMain" time="0.002"/>
+  <testcase name="명언 등록시마다 번호 증가 확인" classname="com.ll.TestMain" time="0.001"/>
+  <testcase name="목록 기능" classname="com.ll.TestMain" time="0.003"/>
+  <testcase name="삭제 기능 확인" classname="com.ll.TestMain" time="0.001"/>
+  <testcase name="삭제 실패 기능 확인" classname="com.ll.TestMain" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
