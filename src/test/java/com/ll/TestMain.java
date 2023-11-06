@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Scanner;
 
 public class TestMain {
     @Test
@@ -17,5 +18,17 @@ public class TestMain {
         System.out.print("명령)");
         String out = byteArrayOutputStream.toString().trim();
         Assertions.assertThat(out).isEqualTo("명령)");
+    }
+
+    @Test
+    @DisplayName("명령어 입력 확인")
+    void t2(){
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+        System.out.print("명령)");
+        String out = byteArrayOutputStream.toString().trim();
+        Scanner scanner = TestUtil.genScanner("종료");
+        String cmd = scanner.nextLine();
+
+        Assertions.assertThat(cmd).isEqualTo("종료");
     }
 }
