@@ -249,4 +249,38 @@ public class TestMain {
     }
 
 
+    @Test
+    @DisplayName("수정 기능 확인")
+    void t11() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+
+        Scanner scanner = TestUtil.genScanner("""
+                    등록
+                    현재를 사랑하라.
+                    작자미상
+                    수정?id=1
+                    현재와 자신을 사랑하라.
+                    홍길동
+                    목록
+                    종료
+                            """.stripIndent());
+        WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+
+        new App(scanner, wiseSayingRepo, cmdController).run();
+        List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
+        scanner.close();
+        String rs = byteArrayOutputStream.toString();
+        Assertions.assertThat(rs).contains("""
+                명언(기존) : 현재를 사랑하라.
+                작가(기존) : 작자미상
+                2 / 홍길동 / 현재와 자신을 사랑하라.
+                """
+        );
+
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+
+    }
+
+
 }
