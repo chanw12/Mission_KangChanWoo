@@ -178,5 +178,75 @@ public class TestMain {
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
 
+    @Test
+    @DisplayName("삭제 기능 확인")
+    void t9() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+
+        Scanner scanner = TestUtil.genScanner("""
+                    등록
+                    현재를 사랑하라.
+                    작자미상
+                    등록
+                    1
+                    2
+                    등록
+                    3
+                    4
+                    삭제?id=1
+                    종료
+                            """.stripIndent());
+        WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+
+        new App(scanner, wiseSayingRepo, cmdController).run();
+        List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
+        scanner.close();
+        Assertions.assertThat(wiseSayingList.size()).isEqualTo(2);
+        String rs = byteArrayOutputStream.toString();
+        Assertions.assertThat(rs).contains("""
+                1번 명언이 삭제되었습니다.
+                """
+        );
+
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+
+    }
+    @Test
+    @DisplayName("삭제 실패 기능 확인")
+    void t10() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+
+        Scanner scanner = TestUtil.genScanner("""
+                    등록
+                    현재를 사랑하라.
+                    작자미상
+                    등록
+                    1
+                    2
+                    등록
+                    3
+                    4
+                    삭제?id=1
+                    삭제?id=1
+                    종료
+                            """.stripIndent());
+        WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+
+        new App(scanner, wiseSayingRepo, cmdController).run();
+        List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
+        scanner.close();
+        Assertions.assertThat(wiseSayingList.size()).isEqualTo(2);
+        String rs = byteArrayOutputStream.toString();
+        Assertions.assertThat(rs).contains("""
+                1번 명언은 존재하지 않습니다.
+                """
+        );
+
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+
+    }
+
 
 }
