@@ -31,4 +31,19 @@ public class TestMain {
 
         Assertions.assertThat(cmd).isEqualTo("종료");
     }
+    @Test
+    @DisplayName("종료 기능 확인")
+    void t3(){
+
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+
+        Scanner scanner = TestUtil.genScanner("""
+                종료
+                """.stripIndent());
+        App app = new App(scanner);
+
+        app.run(); // 프로그램 실행
+
+
+    }
 }
