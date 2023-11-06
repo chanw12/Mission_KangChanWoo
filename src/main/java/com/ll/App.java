@@ -20,9 +20,10 @@ public class App {
 
     public void run() {
         System.out.println("== 명언 앱 ==");
-        WiseSayingRepo.setWiseSayingList(WiseSayingRepo.loadData());
-
+//        WiseSayingRepo.setWiseSayingList(WiseSayingRepo.loadData());
+        WiseSayingRepo.FileLoad();
         cmdController.cmdStart();
-        WiseSayingRepo.saveData(wiseSayingRepo.getWiseSayingList());
+//        WiseSayingRepo.saveData(wiseSayingRepo.getWiseSayingList());
+        WiseSayingRepo.FileSave(wiseSayingRepo.getWiseSayingList());
     }
 }

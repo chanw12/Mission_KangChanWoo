@@ -20,9 +20,9 @@ public class TestMain {
     @BeforeEach
     void setUp(){
         WiseSaying.idVal = 1;
-        WiseSayingRepo.setFilename("testfile.txt");
+        WiseSayingRepo.setFilename("testfile.json");
         try {
-            testFile = File.createTempFile("testfile", ".txt");
+            testFile = File.createTempFile("testfile", ".json");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,8 +31,11 @@ public class TestMain {
     @AfterEach
     void tearDown() {
         List<WiseSaying> wiseSayingList = new ArrayList<>();
-        WiseSayingRepo.saveData(wiseSayingList);
+//        WiseSayingRepo.saveData(wiseSayingList);
+        WiseSayingRepo.FileSave(wiseSayingList);
+
     }
+
 
 
     @Test
@@ -298,19 +301,11 @@ public class TestMain {
     @DisplayName("파일 로드 기능 확인")
     void t12() {
         ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
-
-
-        try {
-            testFile = File.createTempFile("testfile", ".txt");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        WiseSaying wiseSaying = new WiseSaying(1,"현재를 사랑하라.","작자미상");
-        List<WiseSaying> wiseSayingList = new ArrayList<>();
-        wiseSayingList.add(wiseSaying);
-        WiseSayingRepo.saveData(wiseSayingList);
-
         Scanner scanner = TestUtil.genScanner("""
+                    등록
+                    현재를 사랑하라.
+                    작자미상
+                    종료
                     목록
                     종료
                             """.stripIndent());
@@ -318,6 +313,8 @@ public class TestMain {
         CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
 
         new App(scanner, wiseSayingRepo, cmdController).run();
+        new App(scanner, wiseSayingRepo, cmdController).run();
+
         String rs = byteArrayOutputStream.toString();
         Assertions.assertThat(rs).contains("""
                 1 / 작자미상 / 현재를 사랑하라.
