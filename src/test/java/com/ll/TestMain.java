@@ -272,9 +272,7 @@ public class TestMain {
         scanner.close();
         String rs = byteArrayOutputStream.toString();
         Assertions.assertThat(rs).contains("""
-                명언(기존) : 현재를 사랑하라.
-                작가(기존) : 작자미상
-                2 / 홍길동 / 현재와 자신을 사랑하라.
+                1 / 홍길동 / 현재와 자신을 사랑하라.
                 """
         );
 

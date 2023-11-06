@@ -48,6 +48,20 @@ public class CmdController {
                 }else{
                     System.out.println(id+"번 명언은 존재하지 않습니다.");
                 }
+            }else if(rq.getAction().equals("수정")){
+                int id = rq.getParamAsInt("id",0);
+                if(wiseSayingRepo.getWiseSayingList().stream().anyMatch(ws -> ws.getId() == id)){
+                    WiseSaying wiseSaying = wiseSayingRepo.getWiseSayingList().stream().filter(ws -> ws.getId() == id).findFirst().get();
+                    System.out.println("명언(기존) : " + wiseSaying.getBody());
+                    System.out.print("명언 : ");
+                    wiseSaying.setBody(scanner.nextLine());
+                    System.out.println("작가(기존) : "+ wiseSaying.getAuthor());
+                    System.out.print("작가: ");
+                    wiseSaying.setAuthor(scanner.nextLine());
+
+                }else{
+                    System.out.println(id+"번 명언은 존재하지 않습니다.");
+                }
             }
 
 
