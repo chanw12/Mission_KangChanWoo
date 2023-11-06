@@ -1,11 +1,14 @@
 package com.ll;
 
+import com.ll.domain.Repository.WiseSayingRepo;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        App app = new App(scanner);
+        WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+        App app = new App(scanner,wiseSayingRepo);
         app.run();
     }
 }

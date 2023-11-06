@@ -1,12 +1,13 @@
 package com.ll;
 
+import com.ll.domain.Repository.WiseSayingRepo;
 import com.ll.domain.WiseSaying;
 
 import java.util.Scanner;
 
 public class App {
     private final Scanner scanner;
-    public App(Scanner scanner){
+    public App(Scanner scanner, WiseSayingRepo wiseSayingRepo){
         this.scanner = scanner;
     }
     public void run(){
