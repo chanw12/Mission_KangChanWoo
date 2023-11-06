@@ -2,6 +2,7 @@ package com.ll;
 
 
 import com.ll.domain.Context;
+import com.ll.domain.controller.CmdController;
 import com.ll.domain.repository.WiseSayingRepo;
 import com.ll.domain.WiseSaying;
 import org.assertj.core.api.Assertions;
@@ -49,10 +50,12 @@ public class TestMain {
 
         ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+
         Scanner scanner = TestUtil.genScanner("""
                 종료
                 """.stripIndent());
-        App app = new App(scanner,wiseSayingRepo);
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        App app = new App(scanner,wiseSayingRepo,cmdController);
 
         app.run(); // 프로그램 실행
 
@@ -79,8 +82,8 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-
-        new App(scanner,wiseSayingRepo).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        new App(scanner,wiseSayingRepo,cmdController).run();
 
         scanner.close();
 
@@ -107,8 +110,8 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-
-        new App(scanner,wiseSayingRepo).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        new App(scanner,wiseSayingRepo,cmdController).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
 
 

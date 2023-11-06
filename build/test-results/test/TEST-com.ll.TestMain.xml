@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.ll.TestMain" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-11-06T00:55:26" hostname="gangchan-uui-MacBookPro.local" time="0.04">
+<testsuite name="com.ll.TestMain" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-11-06T01:01:09" hostname="gangchan-uui-MacBookPro.local" time="0.046">
   <properties/>
-  <testcase name="명령어 입력창 구현" classname="com.ll.TestMain" time="0.027"/>
-  <testcase name="명령어 입력 확인" classname="com.ll.TestMain" time="0.002"/>
+  <testcase name="명령어 입력창 구현" classname="com.ll.TestMain" time="0.034"/>
+  <testcase name="명령어 입력 확인" classname="com.ll.TestMain" time="0.001"/>
   <testcase name="종료 기능 확인" classname="com.ll.TestMain" time="0.002"/>
   <testcase name="명언 클래스 생성 확인" classname="com.ll.TestMain" time="0.001"/>
-  <testcase name="명언 명령어 입력시 명언 ,작가 입력창 구현" classname="com.ll.TestMain" time="0.004"/>
+  <testcase name="명언 명령어 입력시 명언 ,작가 입력창 구현" classname="com.ll.TestMain" time="0.003"/>
   <testcase name="명언 등록 확인" classname="com.ll.TestMain" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
