@@ -122,5 +122,32 @@ public class TestMain {
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
 
+    @Test
+    @DisplayName("명언 등록시마다 번호 증가 확인")
+    public void t7(){
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+
+        Scanner scanner = TestUtil.genScanner("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                2번째
+                작자미상
+                종료
+                        """.stripIndent());
+        WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+
+        new App(scanner,wiseSayingRepo,cmdController).run();
+        List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
+        scanner.close();
+
+        Assertions.assertThat(wiseSayingList.get(1).getId()).isEqualTo(2);
+
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+
+    }
+
 
 }
