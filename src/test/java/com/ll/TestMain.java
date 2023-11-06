@@ -46,4 +46,12 @@ public class TestMain {
 
 
     }
+
+
+    @Test
+    @DisplayName("명언 클래스 생성 확인")
+    void t4(){
+        WiseSaying wiseSaying = new WiseSaying(WiseSaying.idVal++,"안녕하세요","강찬우");
+
+    }
 }
