@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ll.simpleDb.SimpleDbTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-08T05:29:46" hostname="gangchan-uui-MacBookPro.local" time="0.049">
+  <properties/>
+  <testcase name="delete()" classname="com.ll.simpleDb.SimpleDbTest" time="0.049"/>
+  <system-out><![CDATA[정상적으로 연결되었습니다.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
