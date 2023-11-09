@@ -88,18 +88,7 @@
 ## Refactoring
 
 -----------------------------
-
-### 9단계
-- [X] 데이터 로드 후 신규 명언 등록 시 고유번호가 1부터 시작되는 문제 해결
-
-### 모든 단계
-- [X] Map 객체를 이용한 Controller 구현
-- [X] Text 상수화
-- [ ] JPA를 사용하여 DB 처리
-- [ ] Controller 분기 1개로 수정
-- [X] DB 연동 정보 properties로 분리
-- [X] Obj저장소 싱글톤패턴 적용
-
+- cmdController에서 각각의 기능들을 BoardController에서 메서드로 구현하여 가져오도록 하였다.
 
 
 <br>
