@@ -1,7 +1,6 @@
 package com.ll.domain.controller;
 
 import com.ll.domain.Context;
-import com.ll.domain.WiseSaying;
 import com.ll.domain.repository.WiseSayingRepo;
 import com.ll.domain.utill.Rq;
 
@@ -11,9 +10,11 @@ public class CmdController {
     private final WiseSayingRepo wiseSayingRepo;
     Context context = Context.getInstance();
     private final Scanner scanner;
-    public CmdController(Scanner scanner,WiseSayingRepo wiseSayingRepo){
+    private final BoardController boardController;
+    public CmdController(Scanner scanner,WiseSayingRepo wiseSayingRepo, BoardController boardController){
         this.wiseSayingRepo = wiseSayingRepo;
         this.scanner = scanner;
+        this.boardController = boardController;
     }
 
     public void cmdStart(){
@@ -24,44 +25,15 @@ public class CmdController {
             if (rq.getAction().equals("종료")) {
                 break;
             } else if (cmd.equals("등록")) {
-
-                System.out.print("명언 : ");
-                String content = scanner.nextLine();
-                System.out.print("작가 : ");
-                String authorName = scanner.nextLine();
-                WiseSaying wiseSaying = new WiseSaying(WiseSaying.idVal++, content, authorName);
-                System.out.println(wiseSaying.getId()+ "번 명언이 등록되었습니다.");
-                wiseSayingRepo.getWiseSayingList().add(wiseSaying);
+                boardController.regist();
             }else if(rq.getAction().equals("목록")){
-                System.out.println("번호 / 작가 / 명언");
-                System.out.println("----------------------");
-                for (WiseSaying ws: wiseSayingRepo.getWiseSayingList()){
-                    System.out.println(ws.getId()+ " / "+ ws.getAuthor()+ " / "+ ws.getBody());
-                }
+                boardController.list();
             }else if(rq.getAction().equals("삭제")){
                 int id = rq.getParamAsInt("id",0);
-                if(wiseSayingRepo.getWiseSayingList().stream().anyMatch(ws -> ws.getId() == id)){
-
-                    WiseSaying wiseSaying = wiseSayingRepo.getWiseSayingList().stream().filter(ws -> ws.getId() == id).findFirst().get();
-                    System.out.println(id+"번 명언이 삭제되었습니다.");
-                    wiseSayingRepo.getWiseSayingList().remove(wiseSaying);
-                }else{
-                    System.out.println(id+"번 명언은 존재하지 않습니다.");
-                }
+                boardController.delete(id);
             }else if(rq.getAction().equals("수정")){
                 int id = rq.getParamAsInt("id",0);
-                if(wiseSayingRepo.getWiseSayingList().stream().anyMatch(ws -> ws.getId() == id)){
-                    WiseSaying wiseSaying = wiseSayingRepo.getWiseSayingList().stream().filter(ws -> ws.getId() == id).findFirst().get();
-                    System.out.println("명언(기존) : " + wiseSaying.getBody());
-                    System.out.print("명언 : ");
-                    wiseSaying.setBody(scanner.nextLine());
-                    System.out.println("작가(기존) : "+ wiseSaying.getAuthor());
-                    System.out.print("작가: ");
-                    wiseSaying.setAuthor(scanner.nextLine());
-
-                }else{
-                    System.out.println(id+"번 명언은 존재하지 않습니다.");
-                }
+                boardController.modi(id);
             }
 
 

@@ -2,6 +2,7 @@ package com.ll;
 
 
 import com.ll.domain.Context;
+import com.ll.domain.controller.BoardController;
 import com.ll.domain.controller.CmdController;
 import com.ll.domain.repository.WiseSayingRepo;
 import com.ll.domain.WiseSaying;
@@ -70,7 +71,9 @@ public class TestMain {
         Scanner scanner = TestUtil.genScanner("""
                 종료
                 """.stripIndent());
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
         App app = new App(scanner,wiseSayingRepo,cmdController);
 
         app.run(); // 프로그램 실행
@@ -98,7 +101,9 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
         new App(scanner,wiseSayingRepo,cmdController).run();
 
         scanner.close();
@@ -126,7 +131,9 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
         new App(scanner,wiseSayingRepo,cmdController).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
 
@@ -153,7 +160,9 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
 
         new App(scanner,wiseSayingRepo,cmdController).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
@@ -178,7 +187,9 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
 
         new App(scanner,wiseSayingRepo,cmdController).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
@@ -213,7 +224,9 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
 
         new App(scanner, wiseSayingRepo, cmdController).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
@@ -248,7 +261,9 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
 
         new App(scanner, wiseSayingRepo, cmdController).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
@@ -281,7 +296,9 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
 
         new App(scanner, wiseSayingRepo, cmdController).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
@@ -310,7 +327,9 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
 
         new App(scanner, wiseSayingRepo, cmdController).run();
         new App(scanner, wiseSayingRepo, cmdController).run();
@@ -340,7 +359,9 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
 
         new App(scanner, wiseSayingRepo, cmdController).run();
         new App(scanner, wiseSayingRepo, cmdController).run();
