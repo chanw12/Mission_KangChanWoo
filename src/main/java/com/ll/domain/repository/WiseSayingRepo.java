@@ -24,8 +24,35 @@ public class WiseSayingRepo {
                 );
                 """);
         Sql sql = SimpleDb.genSql();
-        sql.append("select count(*) from Wisesaying");
-        WiseSaying.idVal = sql.selectint()+1;
+        sql.append("select max(id) from Wisesaying");
+
+        WiseSaying.idVal = sql.selectLong()+1;
+    }
+
+    public long findId(long id){
+        Sql sql = SimpleDb.genSql();
+        return sql.append("select count(*) from Wisesaying")
+                .append("where id = ?",id)
+                .selectLong();
+
+    }
+    public WiseSaying findWiseSaying(long id){
+        Sql sql = SimpleDb.genSql();
+        return sql.append("select * from Wisesaying")
+                .selectRow(WiseSaying.class);
+    }
+
+    public long deleteWiseSaying(long id){
+        Sql sql = SimpleDb.genSql();
+        return sql.append("delete from Wisesaying")
+                .append("where id = ?",id)
+                .update();
+    }
+    public long modiWiseSaying(long id,String newbody,String newauthor){
+        Sql sql = SimpleDb.genSql();
+        return sql.append("update Wisesaying")
+                .append("set body = ?, author = ?",newbody,newauthor)
+                .update();
     }
 
 

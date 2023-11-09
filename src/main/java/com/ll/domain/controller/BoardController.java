@@ -14,6 +14,7 @@ public class BoardController {
     private final Scanner scanner;
     private final WiseSayingRepo wiseSayingRepo;
 
+
     public void regist(){
         System.out.print("명언 : ");
         String content = scanner.nextLine();
@@ -39,28 +40,37 @@ public class BoardController {
             System.out.println(i.getId() +" / "+i.getAuthor()+ " / "+i.getBody());
         });
     }
-    public void delete(int id){
-        if(wiseSayingRepo.getWiseSayingList().stream().anyMatch(ws -> ws.getId() == id)){
+    public void delete(long id){
 
-            WiseSaying wiseSaying = wiseSayingRepo.getWiseSayingList().stream().filter(ws -> ws.getId() == id).findFirst().get();
+        long newId = wiseSayingRepo.findId(id);
+        if(newId!=0){
+            wiseSayingRepo.deleteWiseSaying(id);
             System.out.println(id+"번 명언이 삭제되었습니다.");
-            wiseSayingRepo.getWiseSayingList().remove(wiseSaying);
         }else{
             System.out.println(id+"번 명언은 존재하지 않습니다.");
         }
+
+
     }
-    public void modi(int id){
-        if(wiseSayingRepo.getWiseSayingList().stream().anyMatch(ws -> ws.getId() == id)){
-            WiseSaying wiseSaying = wiseSayingRepo.getWiseSayingList().stream().filter(ws -> ws.getId() == id).findFirst().get();
+    public void modi(long id){
+
+        long newId = wiseSayingRepo.findId(id);
+        if(newId != 0){
+            WiseSaying wiseSaying = wiseSayingRepo.findWiseSaying(id);
             System.out.println("명언(기존) : " + wiseSaying.getBody());
             System.out.print("명언 : ");
-            wiseSaying.setBody(scanner.nextLine());
+            String newbody = scanner.nextLine();
+
             System.out.println("작가(기존) : "+ wiseSaying.getAuthor());
             System.out.print("작가: ");
-            wiseSaying.setAuthor(scanner.nextLine());
+            String newAuthor = scanner.nextLine();
+            wiseSayingRepo.modiWiseSaying(id,newbody,newAuthor);
+
 
         }else{
             System.out.println(id+"번 명언은 존재하지 않습니다.");
         }
+
+
     }
 }

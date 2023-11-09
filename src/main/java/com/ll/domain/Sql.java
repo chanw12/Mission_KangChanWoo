@@ -136,22 +136,7 @@ public class Sql {
         }
         return id;
     }
-    public int selectint(){
-        int id = -1;
-        try{
-            this.preparedStatement = connection.prepareStatement(query);
-            setParameters();
-            ResultSet rs = this.preparedStatement.executeQuery();
-            if(rs.next()) {
-                id = rs.getInt(1);
-            }
 
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return id;
-    }
 
     public List<Long> selectLongs(){
         List<Long> li = new ArrayList<>();
@@ -216,6 +201,7 @@ public class Sql {
         }
         return articleMap;
     }
+
 
     public <T> T selectRow(Class<T> t){
         T resultInstance = null;

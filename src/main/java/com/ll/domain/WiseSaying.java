@@ -2,10 +2,8 @@ package com.ll.domain;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class WiseSaying implements Serializable {
+public class WiseSaying {
 
     public static long idVal = 1;
     private long id;

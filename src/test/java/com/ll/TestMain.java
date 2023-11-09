@@ -2,20 +2,19 @@ package com.ll;
 
 
 import com.ll.domain.Context;
-
 import com.ll.domain.SimpleDb;
+import com.ll.domain.WiseSaying;
 import com.ll.domain.controller.BoardController;
 import com.ll.domain.controller.CmdController;
 import com.ll.domain.repository.WiseSayingRepo;
-import com.ll.domain.WiseSaying;
-
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,13 +34,13 @@ public class TestMain {
         }
     }
 
-    @AfterEach
-    void tearDown() {
-        List<WiseSaying> wiseSayingList = new ArrayList<>();
-//        WiseSayingRepo.saveData(wiseSayingList);
-        WiseSayingRepo.FileSave(wiseSayingList);
-
-    }
+//    @AfterEach
+//    void tearDown() {
+//        List<WiseSaying> wiseSayingList = new ArrayList<>();
+////        WiseSayingRepo.saveData(wiseSayingList);
+//        WiseSayingRepo.FileSave(wiseSayingList);
+//
+//    }
 
 
 
