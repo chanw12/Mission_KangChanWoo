@@ -7,7 +7,7 @@ public class SimpleDb {
     private String database;
     private String user_name;
     private String password;
-    private Connection con = null;
+    private static Connection  con = null;
     public SimpleDb(String server, String database, String user_name, String password){
         this.database = database;
         this.server = server;
@@ -27,7 +27,7 @@ public class SimpleDb {
 
         // 2.연결
         try {
-            con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database + "?useSSL=false&devMode="+isDev, user_name, password);
+            this.con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database + "?useSSL=false&devMode="+isDev, user_name, password);
             System.out.println("정상적으로 연결되었습니다.");
         } catch(SQLException e) {
             System.err.println("con 오류:" + e.getMessage());
@@ -35,7 +35,7 @@ public class SimpleDb {
         }
     }
 
-    public void run(String sql){
+    public static void run(String sql){
 
         Statement st = null;
         try {
@@ -46,7 +46,7 @@ public class SimpleDb {
         }
 
     }
-    public void run(String sql,Object... params){
+    public static void run(String sql,Object... params){
         PreparedStatement st = null;
         try{
             st = con.prepareStatement(sql);
@@ -61,7 +61,7 @@ public class SimpleDb {
         }
     }
 
-    public Sql genSql(){
+    public static Sql genSql(){
         return new Sql(con);
     }
 
