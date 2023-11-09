@@ -2,23 +2,29 @@ package com.ll;
 
 
 import com.ll.domain.Context;
+import com.ll.domain.SimpleDb;
+import com.ll.domain.WiseSaying;
+import com.ll.domain.controller.BoardController;
 import com.ll.domain.controller.CmdController;
 import com.ll.domain.repository.WiseSayingRepo;
-import com.ll.domain.WiseSaying;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class TestMain {
     private File testFile;
+    private SimpleDb simpleDb;
     @BeforeEach
     void setUp(){
+        simpleDb = new SimpleDb("localhost", "simpleDb__test", "root", "lldj123414");
+
         WiseSaying.idVal = 1;
         WiseSayingRepo.setFilename("testfile.json");
         try {
@@ -28,13 +34,13 @@ public class TestMain {
         }
     }
 
-    @AfterEach
-    void tearDown() {
-        List<WiseSaying> wiseSayingList = new ArrayList<>();
-//        WiseSayingRepo.saveData(wiseSayingList);
-        WiseSayingRepo.FileSave(wiseSayingList);
-
-    }
+//    @AfterEach
+//    void tearDown() {
+//        List<WiseSaying> wiseSayingList = new ArrayList<>();
+////        WiseSayingRepo.saveData(wiseSayingList);
+//        WiseSayingRepo.FileSave(wiseSayingList);
+//
+//    }
 
 
 
@@ -70,8 +76,11 @@ public class TestMain {
         Scanner scanner = TestUtil.genScanner("""
                 종료
                 """.stripIndent());
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
-        App app = new App(scanner,wiseSayingRepo,cmdController);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+
+        App app = new App(scanner,wiseSayingRepo,cmdController,simpleDb);
 
         app.run(); // 프로그램 실행
 
@@ -83,7 +92,6 @@ public class TestMain {
     @DisplayName("명언 클래스 생성 확인")
     void t4(){
         WiseSaying wiseSaying = new WiseSaying(WiseSaying.idVal++,"안녕하세요","강찬우");
-
     }
 
     @Test
@@ -98,8 +106,10 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
-        new App(scanner,wiseSayingRepo,cmdController).run();
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+        new App(scanner,wiseSayingRepo,cmdController,simpleDb).run();
 
         scanner.close();
 
@@ -126,8 +136,10 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
-        new App(scanner,wiseSayingRepo,cmdController).run();
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
+
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+        new App(scanner,wiseSayingRepo,cmdController,simpleDb).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
 
 
@@ -153,9 +165,11 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
 
-        new App(scanner,wiseSayingRepo,cmdController).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+
+        new App(scanner,wiseSayingRepo,cmdController,simpleDb).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
         scanner.close();
         Assertions.assertThat(wiseSayingList.size()).isEqualTo(2);
@@ -178,9 +192,11 @@ public class TestMain {
                 종료
                         """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner,wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
 
-        new App(scanner,wiseSayingRepo,cmdController).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+
+        new App(scanner,wiseSayingRepo,cmdController,simpleDb).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
         scanner.close();
         String rs = byteArrayOutputStream.toString();
@@ -213,9 +229,11 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
 
-        new App(scanner, wiseSayingRepo, cmdController).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+
+        new App(scanner, wiseSayingRepo, cmdController,simpleDb).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
         scanner.close();
         Assertions.assertThat(wiseSayingList.size()).isEqualTo(2);
@@ -248,9 +266,11 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
 
-        new App(scanner, wiseSayingRepo, cmdController).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+
+        new App(scanner, wiseSayingRepo, cmdController,simpleDb).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
         scanner.close();
         Assertions.assertThat(wiseSayingList.size()).isEqualTo(2);
@@ -281,9 +301,11 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
 
-        new App(scanner, wiseSayingRepo, cmdController).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+
+        new App(scanner, wiseSayingRepo, cmdController,simpleDb).run();
         List<WiseSaying> wiseSayingList = wiseSayingRepo.getWiseSayingList();
         scanner.close();
         String rs = byteArrayOutputStream.toString();
@@ -310,10 +332,12 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
 
-        new App(scanner, wiseSayingRepo, cmdController).run();
-        new App(scanner, wiseSayingRepo, cmdController).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+
+        new App(scanner, wiseSayingRepo, cmdController,simpleDb).run();
+        new App(scanner, wiseSayingRepo, cmdController,simpleDb).run();
 
         String rs = byteArrayOutputStream.toString();
         Assertions.assertThat(rs).contains("""
@@ -340,10 +364,12 @@ public class TestMain {
                     종료
                             """.stripIndent());
         WiseSayingRepo wiseSayingRepo = new WiseSayingRepo();
-        CmdController cmdController = new CmdController(scanner, wiseSayingRepo);
+        BoardController boardController = new BoardController(scanner,wiseSayingRepo);
 
-        new App(scanner, wiseSayingRepo, cmdController).run();
-        new App(scanner, wiseSayingRepo, cmdController).run();
+        CmdController cmdController = new CmdController(scanner,wiseSayingRepo,boardController);
+
+        new App(scanner, wiseSayingRepo, cmdController,simpleDb).run();
+        new App(scanner, wiseSayingRepo, cmdController,simpleDb).run();
 
 
         String rs = byteArrayOutputStream.toString();

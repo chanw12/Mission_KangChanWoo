@@ -1,11 +1,12 @@
 package com.ll.domain;
 
-import java.io.Serializable;
+import lombok.Data;
 
-public class WiseSaying implements Serializable {
+@Data
+public class WiseSaying {
 
-    public static int idVal = 1;
-    private int id;
+    public static long idVal = 1;
+    private long id;
     private String body;
     private String author;
 
@@ -13,33 +14,10 @@ public class WiseSaying implements Serializable {
 
     }
 
-    public WiseSaying(int id, String body, String author) {
+    public WiseSaying(long id, String body, String author) {
         this.id = id;
         this.body = body;
         this.author = author;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 }

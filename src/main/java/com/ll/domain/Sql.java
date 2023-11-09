@@ -1,4 +1,4 @@
-package com.ll.simpleDb;
+package com.ll.domain;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -137,6 +137,7 @@ public class Sql {
         return id;
     }
 
+
     public List<Long> selectLongs(){
         List<Long> li = new ArrayList<>();
 
@@ -200,6 +201,7 @@ public class Sql {
         }
         return articleMap;
     }
+
 
     public <T> T selectRow(Class<T> t){
         T resultInstance = null;
